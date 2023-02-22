@@ -20,7 +20,7 @@ const fileFilter = (req, file, cb) => {
 
 export class Utils {
     public MAX_TOKEN_TIME = 600000;
-    public multer = Multer({storage: storageOptions, fileFilter: fileFilter});
+    public multer = Multer({storage: storageOptions});
 
     static generateVerificationToken(size: number = 5) {
         let digits = '0123456789';

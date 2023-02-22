@@ -1,6 +1,6 @@
-import {validationResult} from 'express-validator';
+import { validationResult } from 'express-validator';
 import * as Jwt from 'jsonwebtoken';
-import {getEnvironmentVariables} from '../environments/env';
+import { getEnvironmentVariables } from '../environments/env';
 
 export class GlobalMiddleWare {
     static checkError(req, res, next) {
@@ -12,17 +12,15 @@ export class GlobalMiddleWare {
         }
     }
 
-    static async authenticate(roles=[],req, res, next) {
-        if (typeof roles === 'string') {
-            roles = [roles];
-        }
+    static async authenticate(req, res, next) {
         const authHeader = req.headers.authorization;
-        const token = authHeader ? authHeader.slice(7, authHeader.length) : null;
+        const token = authHeader ? authHeader : null;
+
         try {
             Jwt.verify(token, getEnvironmentVariables().jwt_secret, ((err, decoded) => {
                 if (err) {
                     next(err)
-                } else if (roles.length && !roles.includes(req.user.role) ) {
+                } else if (!decoded) {
                     req.errorStatus = 401;
                     next(new Error('User Not Authorised'))
                 } else {
@@ -34,5 +32,40 @@ export class GlobalMiddleWare {
             req.errorStatus = 401;
             next(e);
         }
+    }    
+}
+
+export const authorizeRoles = (roles=[]) => {
+    if (typeof roles === 'string') {
+
+        roles = [roles];
+ 
+    }
+    return (req, res, next) => {
+
+
+        const authHeader = req.headers.authorization;
+        const token = authHeader ? authHeader : null;
+        console.log(token)
+        try {
+            Jwt.verify(token, getEnvironmentVariables().jwt_secret, ((err, decoded) => {
+                console.log(err,'lll')
+                if (err) {
+               
+                    next(err)
+                } else if (!roles.includes(req.user.role)) {
+                    req.errorStatus = 401;
+                    next(new Error('User Not Authorised'))
+                } else {
+                    req.user = decoded;
+                    next();
+                }
+            }))
+        } catch (e) {
+            req.errorStatus = 401;
+            next(e);
+        }
+
+
     }
 }
