@@ -23,6 +23,7 @@ class EventRouter {
     }
 
     postRoutes() {
+
         this.router.post('/add',GlobalMiddleWare.authenticate,new Utils().multer.array('file'),EventController.addNewEvents,EventController.addNewEvents);
     }
 

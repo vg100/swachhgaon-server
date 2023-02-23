@@ -7,6 +7,8 @@ const eventSchema = new mongoose.Schema({
     type_of_training: {type: String},
     location:{type: String},
     files:{type:Array},
+    startDate:{type: Date},
+    endDate:{type: Date},
     no_of_participant: {type: Number},
     no_of_males:{type: Number},
     no_of_females:{type: Number},

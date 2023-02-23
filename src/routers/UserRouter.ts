@@ -16,11 +16,11 @@ class UserRouter {
     }
 
     getRoutes() {
-     
+        this.router.get('/',GlobalMiddleWare.authenticate,UserController.getAllUser);
     }
 
     postRoutes() {
-        this.router.post('/signup', UserController.signUp);
+        this.router.post('/signup',GlobalMiddleWare.authenticate,UserController.signUp);
         this.router.post('/login', UserValidators.login(), GlobalMiddleWare.checkError, UserController.login);
     }
 

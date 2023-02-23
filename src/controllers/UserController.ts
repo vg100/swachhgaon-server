@@ -1,11 +1,11 @@
 import User from '../models/User';
 import {Utils} from '../utils/Utils';
-import {NodeMailer} from '../utils/NodeMailer';
 import * as Jwt from 'jsonwebtoken';
 import {getEnvironmentVariables} from '../environments/env';
 
 export class UserController {
     static async signUp(req, res, next) {
+        console.log("ggg")
         const email = req.body.email;
         const name = req.body.name;
         const password = req.body.password;
@@ -17,6 +17,7 @@ export class UserController {
                 password: hash,
                 name: name,
                 role: role,
+                gender: req.body.gender,
                 created_at: new Date(),
                 updated_at: new Date()
             };
@@ -38,6 +39,15 @@ export class UserController {
                 getEnvironmentVariables().jwt_secret, {expiresIn: '120d'});
             const data = {token: token, user: user};
             res.json(data);
+        } catch (e) {
+            next(e);
+        }
+    }
+    static async getAllUser(req, res, next) {
+    
+        try {
+            const users: any = await User.find()
+            res.json(users);
         } catch (e) {
             next(e);
         }

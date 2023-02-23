@@ -21,7 +21,7 @@ export class EventController {
  static async getAllEvents(req, res, next) {
     
     try {
-        const events: any = await Event.find()
+        const events: any = await Event.find({user_id:req.user.user_id})
         res.json(events);
     } catch (e) {
         next(e);
