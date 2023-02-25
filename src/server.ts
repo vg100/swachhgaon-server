@@ -6,6 +6,7 @@ import UserRouter from './routers/UserRouter';
 import bodyParser = require('body-parser');
 import * as cors from 'cors';
 import EventRouter from './routers/EventRouter';
+import HealthCheck from './routers/HealthCheck';
 
 export class Server {
     public app: express.Application = express();
@@ -66,6 +67,8 @@ export class Server {
         this.app.use('/src/uploads', express.static('src/uploads'));
         this.app.use('/api/user', UserRouter);
         this.app.use('/api/event',EventRouter)
+        this.app.use('/api/health', HealthCheck)
+
        
     }
 

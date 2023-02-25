@@ -52,4 +52,18 @@ export class UserController {
             next(e);
         }
     }
+
+    static async healthCheck(req, res, next) {
+    
+        try {
+            const resp = {
+               status: 'UP',
+               app: 'Swatchh Gaon' 
+            }   
+            res.json(resp);     
+        } catch (e) {
+            next(e);
+        }
+    }
+    
 }
