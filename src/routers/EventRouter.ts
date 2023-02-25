@@ -4,6 +4,7 @@ import {UserController} from '../controllers/UserController';
 import {authorizeRoles, GlobalMiddleWare} from '../middlewares/GlobalMiddleWare';
 import { Roles } from '../models/User';
 import { Utils } from '../utils/Utils';
+import { EventValidators } from '../validators/EventValidator';
 import { UserValidators } from '../validators/UserValidators';
 
 
@@ -24,7 +25,11 @@ class EventRouter {
 
     postRoutes() {
 
-        this.router.post('/add',GlobalMiddleWare.authenticate,new Utils().multer.array('file'),EventController.addNewEvents,EventController.addNewEvents);
+        this.router.post('/add',GlobalMiddleWare.authenticate, 
+        EventValidators.ceateEvent(), 
+        GlobalMiddleWare.checkError,
+        new Utils().multer.array('file'),
+       EventController.addNewEvents);
     }
 
     patchRoutes() {

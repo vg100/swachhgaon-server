@@ -5,6 +5,7 @@ import * as cloudinary from 'cloudinary';
 import UserRouter from './routers/UserRouter';
 import bodyParser = require('body-parser');
 import * as cors from 'cors';
+import * as morgan from 'morgan';
 import EventRouter from './routers/EventRouter';
 
 export class Server {
@@ -22,7 +23,13 @@ export class Server {
     setConfigurations() {
         this.connectMongoDb();
         this.configureBodyParser();
+        this.conectLog()
         // this.cloudinaryConfig()
+    }
+
+    conectLog(){
+        morgan.format('myFormat', '[:date[clf]] ":method :url" :status :res[content-length] - :response-time ms');
+        this.app.use(morgan('tiny')); 
     }
 
     connectMongoDb() {
