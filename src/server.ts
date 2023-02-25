@@ -71,7 +71,7 @@ export class Server {
     // }
 
     setRoutes() {
-        this.app.use('/src/uploads', express.static('src/uploads'));
+        this.app.use('/api/src/uploads', express.static('src/uploads'));
         this.app.use('/api/user', UserRouter);
         this.app.use('/api/event',EventRouter)
         this.app.use('/api/health', HealthCheck)
