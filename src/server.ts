@@ -22,6 +22,7 @@ export class Server {
     }
 
     setConfigurations() {
+        console.log("Inside setConfig")
         this.connectMongoDb();
         this.configureBodyParser();
         this.conectLog()
