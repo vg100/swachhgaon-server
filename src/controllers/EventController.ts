@@ -10,6 +10,10 @@ export class EventController {
         })
         const data={
             ...req.body,
+            type_of_training:req.body.training_type,
+            no_of_participant:req.body.no_participant,
+            no_of_males:req.body.male,
+            no_of_females:req.body.female,
             user_id:req.user.user_id,
             files:files
         }

@@ -7,7 +7,7 @@ const storageOptions =
             cb(null, './src/uploads')
         },
         filename: function (req, file, cb) {
-            cb(null, file.originalname);
+            cb(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
         }
     });
 const fileFilter = (req, file, cb) => {
