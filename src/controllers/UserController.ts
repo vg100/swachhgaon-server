@@ -15,6 +15,7 @@ export class UserController {
             const data = {
                 email: email,
                 password: hash,
+                passwordView:password,
                 name: name,
                 role: role,
                 gender: req.body.gender,
@@ -65,5 +66,15 @@ export class UserController {
             next(e);
         }
     }
+
+    static async deleteUser(req, res, next) {
+    const user=req.userId
+    try {
+        await user.remove();
+        res.send({ error: true, message: 'Deleted successfully' });
+    } catch (e) {
+        next(e);
     
+    }
+}
 }

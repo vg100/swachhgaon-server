@@ -21,11 +21,10 @@ export class EventController {
         res.send(user);
        
  }
-
  static async getAllEvents(req, res, next) {
 
     try {
-        const events: any = await Event.find({user_id:req.user.user_id})
+        const events: any = await Event.find({user_id:req.user.user_id}).populate('attendances')
         res.json(events);
     } catch (e) {
         next(e);

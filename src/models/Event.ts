@@ -12,6 +12,7 @@ const eventSchema = new mongoose.Schema({
     no_of_participant: {type: Number},
     no_of_males:{type: Number},
     no_of_females:{type: Number},
+    attendances:[{type: mongoose.Types.ObjectId, ref: 'attendances'}],
     report: {type: String},
     created_at: {type: Date, required: true, default: new Date()},
     updated_at: {type: Date, required: true, default: new Date()},

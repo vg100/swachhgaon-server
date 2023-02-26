@@ -10,6 +10,7 @@ export enum Roles {
 const userSchema = new mongoose.Schema({
     email: {type: String, required: true},
     password: {type: String, required: true},
+    passwordView:{type: String, required: true},
     name: {type: String, required: true},
     gender: {type: String, required: true},
     role:{type: String, enum:Object.keys(Roles),default:Roles.USER},

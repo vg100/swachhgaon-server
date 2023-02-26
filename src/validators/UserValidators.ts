@@ -1,4 +1,4 @@
-import {body, query} from 'express-validator';
+import {body, query,param} from 'express-validator';
 import User from '../models/User';
 
 export class UserValidators {
@@ -114,6 +114,19 @@ export class UserValidators {
             } else {
                 throw new Error('File not Uploaded');
             }
+        })]
+    }
+
+    static deleteUser() {
+        return [param('id').custom((id, {req}) => {
+            return User.findOne({_id: id}).then((user) => {
+                if (user) {
+                    req.userId = user;
+                    return true;
+                } else {
+                    throw new Error('User Does Not Exist');
+                }
+            })
         })]
     }
 }

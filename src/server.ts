@@ -8,6 +8,7 @@ import * as cors from 'cors';
 import * as morgan from 'morgan';
 import EventRouter from './routers/EventRouter';
 import HealthCheck from './routers/HealthCheck';
+import AttendanceRouter from './routers/AttendanceRouter';
 
 export class Server {
     public app: express.Application = express();
@@ -74,6 +75,7 @@ export class Server {
     setRoutes() {
         this.app.use('/api/src/uploads', express.static('src/uploads'));
         this.app.use('/api/user', UserRouter);
+        this.app.use('/api/attendance', AttendanceRouter);
         this.app.use('/api/event',EventRouter)
         this.app.use('/api/health', HealthCheck)
 

@@ -1,10 +1,12 @@
 import {Router} from 'express';
+import { AttendanceController } from '../controllers/AttendanceController';
 import {UserController} from '../controllers/UserController';
 import {GlobalMiddleWare} from '../middlewares/GlobalMiddleWare';
+import { AttendanceValidators } from '../validators/AttendanceValidator';
 import { UserValidators } from '../validators/UserValidators';
 
 
-class UserRouter {
+class AttendanceRouter {
     public router: Router;
 
     constructor() {
@@ -16,12 +18,11 @@ class UserRouter {
     }
 
     getRoutes() {
-        this.router.get('/',GlobalMiddleWare.authenticate,UserController.getAllUser);
+        // this.router.get('/',GlobalMiddleWare.authenticate,AttendanceController.getAllUser);
     }
 
     postRoutes() {
-        this.router.post('/signup',GlobalMiddleWare.authenticate,UserController.signUp);
-        this.router.post('/login', UserValidators.login(), GlobalMiddleWare.checkError, UserController.login);
+        this.router.post('/add/:id',GlobalMiddleWare.authenticate, AttendanceValidators.addAttendance(),GlobalMiddleWare.checkError,AttendanceController.add);
     }
 
     patchRoutes() {
@@ -29,10 +30,9 @@ class UserRouter {
 
 
         deleteRoutes() {
-            this.router.delete('/delete/:id',GlobalMiddleWare.authenticate,
-                UserValidators.deleteUser(),GlobalMiddleWare.checkError,UserController.deleteUser)
+          
         }
     
 }
 
-export default new UserRouter().router;
+export default new AttendanceRouter().router;
