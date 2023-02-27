@@ -14,6 +14,7 @@ const userSchema = new mongoose.Schema({
     name: {type: String, required: true},
     gender: {type: String, required: true},
     role:{type: String, enum:Object.keys(Roles),default:Roles.USER},
+    phone_no: {type: Number},
     created_at: {type: Date, required: true, default: new Date()},
     updated_at: {type: Date, required: true, default: new Date()},
 });

@@ -5,7 +5,6 @@ import {getEnvironmentVariables} from '../environments/env';
 
 export class UserController {
     static async signUp(req, res, next) {
-        console.log("ggg")
         const email = req.body.email;
         const name = req.body.name;
         const password = req.body.password;
@@ -36,7 +35,7 @@ export class UserController {
                 plainPassword: password,
                 encryptedPassword: user.password
             });
-            const token = Jwt.sign({email: user.email, user_id: user._id},
+            const token = Jwt.sign({email: user.email, user_id: user._id,role:user.role},
                 getEnvironmentVariables().jwt_secret, {expiresIn: '120d'});
             const data = {token: token, user: user};
             res.json(data);

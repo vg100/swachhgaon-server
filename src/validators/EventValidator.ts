@@ -3,7 +3,7 @@ import Event from '../models/User';
 
 export class EventValidators {
     static ceateEvent() {
-        return [body('supervisor', 'Supervisor is Required'),
+        return [body('event', 'Event Name is Required'),
                 body('type_of_training', 'type_of_training is Required'),
                 body('location', 'Name is Required'),
                 body('files', 'files is Required'),

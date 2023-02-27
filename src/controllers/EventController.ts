@@ -22,9 +22,9 @@ export class EventController {
        
  }
  static async getAllEvents(req, res, next) {
-
+    const isUser=req.user.role==="USER"?{user_id:req.user.user_id}:{}
     try {
-        const events: any = await Event.find({user_id:req.user.user_id}).populate('attendances')
+        const events: any = await Event.find(isUser).populate('attendances')
         res.json(events);
     } catch (e) {
         next(e);

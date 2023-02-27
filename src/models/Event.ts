@@ -3,7 +3,7 @@ import {model} from 'mongoose';
 
 const eventSchema = new mongoose.Schema({
     user_id: {type: mongoose.Types.ObjectId, required: true,ref:"users"},
-    supervisor: {type: String},
+    eventname: {type: String},
     type_of_training: {type: String},
     location:{type: String},
     files:{type:Array},
