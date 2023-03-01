@@ -129,6 +129,21 @@ export class UserValidators {
             })
         })]
     }
+
+    static editUser() {
+        return [param('id').custom((id, {req}) => {
+            return User.findOne({_id: id}).then((user) => {
+                if (user) {
+                    req.userId = user;
+                    return true;
+                } else {
+                    throw new Error('User Does Not Exist');
+                }
+            })
+        })]
+    }
+
+    
 }
 
 

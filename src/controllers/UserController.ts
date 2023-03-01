@@ -70,10 +70,26 @@ export class UserController {
     const user=req.userId
     try {
         await user.remove();
-        res.send({ error: true, message: 'Deleted successfully' });
+        res.send({ message: 'Deleted successfully' });
     } catch (e) {
         next(e);
     
     }
 }
+
+static async updateUser(req,res,next){
+    try {
+        const hash = await Utils.encryptPassword(req?.body?.password);
+        const newUser = await User.findOneAndUpdate({_id: req.userId._id}, {
+            ...req.body,
+            password: hash,
+            passwordView:req?.body?.password,
+        },
+            {new: true});
+            res.send({ message: 'updated successfully' });
+    } catch (error) {
+        next(error)
+    }
+}
+
 }
