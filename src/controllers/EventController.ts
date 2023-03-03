@@ -1,6 +1,6 @@
 import { header } from "express-validator";
 import Event from "../models/Event";
-
+const XLSX = require('xlsx');
 export class EventController {
 
     static async addNewEvents(req, res, next) {
@@ -29,5 +29,21 @@ export class EventController {
     } catch (e) {
         next(e);
     }
-}
+  }
+
+  static async getEventExcelDownload(req, res, next) {
+    try {
+        const events: any = await Event.find()
+        const workSheet = XLSX.utils.json_to_sheet(events);
+        const workBook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workBook, workSheet, "Sheet 1");
+        XLSX.writeFile(workBook, "./temp/sample.xlsx");
+        res.json(events);
+    } catch (e) {
+        next(e);
+    }
+
+  }
+
+
 }

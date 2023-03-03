@@ -21,6 +21,7 @@ class EventRouter {
 
     getRoutes() {
        this.router.get('/', GlobalMiddleWare.authenticate, EventController.getAllEvents);
+       this.router.get('/event-download', GlobalMiddleWare.authenticate, EventController.getAllEvents);
     }
 
     postRoutes() {
