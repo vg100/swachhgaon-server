@@ -26,6 +26,7 @@ class UserRouter {
 
     patchRoutes() {
         this.router.patch('/update/:id', GlobalMiddleWare.checkError, UserValidators.editUser(),GlobalMiddleWare.checkError,UserController.updateUser);
+ 
     }
 
 

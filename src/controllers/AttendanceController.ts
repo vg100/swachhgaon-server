@@ -6,9 +6,7 @@ import Attendance from '../models/Attendance';
 
 export class AttendanceController {
     static async add(req, res, next) {
-        const event=req.event
-        console.log(event)
-     
+        const event=req.event     
        try {
         const attendance = new Attendance({
            ...req.body,

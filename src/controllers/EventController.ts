@@ -45,5 +45,40 @@ export class EventController {
 
   }
 
+  static async updateEvent(req, res, next) {
+    const event=req?.event?._id
+    try {
+        const files=[]
+        req.files.forEach((file)=>{
+          files.push(file.path)
+        })
+       await Event.findOneAndUpdate({_id: event}, {
+        ...req.body,
+        type_of_training:req.body.training_type,
+        no_of_participant:req.body.no_participant,
+        no_of_males:req.body.male,
+        no_of_females:req.body.female,
+        files:[...req?.event.files,...files]
+    },
+        {new: true});
+        res.json({ message: 'updated successfully' });
+    } catch (e) {
+        next(e);
+    }
+  }
+
+  static async deleteFile(req, res, next) {
+    const event=req?.event
+    const index= req?.params.index
+    try {
+        event.files.splice(index, 1)
+        event.save()
+        res.json({ message: 'removed successfully' });
+    } catch (e) {
+        next(e);
+    }
+  }
+
+
 
 }

@@ -1,5 +1,5 @@
-import {body, query} from 'express-validator';
-import Event from '../models/User';
+import {body, query,param} from 'express-validator';
+import Event from '../models/Event';
 
 export class EventValidators {
     static ceateEvent() {
@@ -14,6 +14,32 @@ export class EventValidators {
                 body('no_of_females', 'no_of_females is Required')
             ];
     }
+
+    static updateEvent() {
+        return [param('id').custom((id, {req}) => {
+            return Event.findOne({_id: id}).then((event) => {
+                if (event) {
+                    req.event = event;
+                    return true;
+                } else {
+                    throw new Error('Event Does Not Exist');
+                }
+            })
+        })]
+    }
+    static deleteFile() {
+        return [param('id').custom((id, {req}) => {
+            return Event.findOne({_id: id}).then((event) => {
+                if (event) {
+                    req.event = event
+                    return true;
+                } else {
+                    throw new Error('Event Does Not Exist');
+                }
+            })
+        })]
+    }
+
    
 }
 

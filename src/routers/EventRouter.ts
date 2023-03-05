@@ -34,10 +34,10 @@ class EventRouter {
     }
 
     patchRoutes() {
+        this.router.patch('/update/:id', GlobalMiddleWare.authenticate,EventValidators.updateEvent(),new Utils().multer.array('file'),GlobalMiddleWare.checkError,EventController.updateEvent);
     }
-
     deleteRoutes() {
-
+        this.router.delete('/deletefile/:id/:index',GlobalMiddleWare.authenticate,EventValidators.deleteFile(),GlobalMiddleWare.checkError,EventController.deleteFile)
     }
 }
 
