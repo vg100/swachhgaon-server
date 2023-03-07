@@ -15,7 +15,6 @@ class AttendanceController {
     static add(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const event = req.event;
-            console.log(event);
             try {
                 const attendance = new Attendance_1.default(Object.assign(Object.assign({}, req.body), { created_at: new Date(), updated_at: new Date() }));
                 event.attendances.push(attendance);
