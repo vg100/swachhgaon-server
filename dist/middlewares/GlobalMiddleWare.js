@@ -57,10 +57,8 @@ const authorizeRoles = (roles = []) => {
     return (req, res, next) => {
         const authHeader = req.headers.authorization;
         const token = authHeader ? authHeader : null;
-        console.log(token);
         try {
             Jwt.verify(token, (0, env_1.getEnvironmentVariables)().jwt_secret, ((err, decoded) => {
-                console.log(err, 'lll');
                 if (err) {
                     next(err);
                 }
