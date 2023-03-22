@@ -17,7 +17,7 @@ export class AttendanceValidators {
                 })
             }),
             body('name', 'Name is Required').isString(),
-            body('age', 'Age is Required').isNumeric(),
+            body('village', 'Village is Required').isString(),
             body('phone_no', 'Phone Number is Required').isNumeric(),
             body('gender', 'Phone Number is Required').isString(),
         ]

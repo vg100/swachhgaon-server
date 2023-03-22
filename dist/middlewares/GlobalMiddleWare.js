@@ -55,21 +55,19 @@ const authorizeRoles = (roles = []) => {
         roles = [roles];
     }
     return (req, res, next) => {
-        const authHeader = req.headers.authorization;
-        const token = authHeader ? authHeader : null;
         try {
+            const authHeader = req.headers["authorization"] || req.headers["Authorization"];
+            const token = authHeader ? authHeader : null;
             Jwt.verify(token, (0, env_1.getEnvironmentVariables)().jwt_secret, ((err, decoded) => {
                 if (err) {
                     next(err);
                 }
-                else if (!roles.includes(req.user.role)) {
-                    req.errorStatus = 401;
-                    next(new Error('User Not Authorised'));
-                }
-                else {
-                    req.user = decoded;
-                    next();
-                }
+                if (!decoded.role)
+                    return next(new Error('Error: Role missing'));
+                if (roles.indexOf(decoded.role) === -1)
+                    return next(new Error('Error: User not authorized'));
+                req.user = decoded;
+                next();
             }));
         }
         catch (e) {

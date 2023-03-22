@@ -18,10 +18,20 @@ const fileFilter = (req, file, cb) => {
     }
 };
 
+const excelFilter = (req, file, cb) => {
+    if (
+      file.mimetype.includes("excel") ||
+      file.mimetype.includes("spreadsheetml")
+    ) {
+      cb(null, true);
+    } else {
+      cb("Please upload only excel file.", false);
+    }
+  };
+
 export class Utils {
     public MAX_TOKEN_TIME = 600000;
     public multer = Multer({storage: storageOptions});
-
     static generateVerificationToken(size: number = 5) {
         let digits = '0123456789';
         let otp = '';

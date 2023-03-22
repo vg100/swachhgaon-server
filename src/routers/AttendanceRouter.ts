@@ -18,7 +18,7 @@ class AttendanceRouter {
     }
 
     getRoutes() {
-        // this.router.get('/',GlobalMiddleWare.authenticate,AttendanceController.getAllUser);
+    
     }
 
     postRoutes() {

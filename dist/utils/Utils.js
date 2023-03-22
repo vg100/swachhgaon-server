@@ -28,6 +28,15 @@ const fileFilter = (req, file, cb) => {
         cb(null, false);
     }
 };
+const excelFilter = (req, file, cb) => {
+    if (file.mimetype.includes("excel") ||
+        file.mimetype.includes("spreadsheetml")) {
+        cb(null, true);
+    }
+    else {
+        cb("Please upload only excel file.", false);
+    }
+};
 class Utils {
     constructor() {
         this.MAX_TOKEN_TIME = 600000;

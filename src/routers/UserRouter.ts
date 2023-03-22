@@ -1,6 +1,6 @@
 import {Router} from 'express';
 import {UserController} from '../controllers/UserController';
-import {GlobalMiddleWare} from '../middlewares/GlobalMiddleWare';
+import {authorizeRoles, GlobalMiddleWare} from '../middlewares/GlobalMiddleWare';
 import { UserValidators } from '../validators/UserValidators';
 
 
@@ -16,7 +16,7 @@ class UserRouter {
     }
 
     getRoutes() {
-        this.router.get('/',GlobalMiddleWare.authenticate,UserController.getAllUser);
+        this.router.get('/',authorizeRoles(["ADMIN","USER"]),UserController.getAllUser);
     }
 
     postRoutes() {

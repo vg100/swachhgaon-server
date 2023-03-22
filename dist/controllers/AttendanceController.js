@@ -16,10 +16,11 @@ class AttendanceController {
         return __awaiter(this, void 0, void 0, function* () {
             const event = req.event;
             try {
-                const attendance = new Attendance_1.default(Object.assign(Object.assign({}, req.body), { created_at: new Date(), updated_at: new Date() }));
-                event.attendances.push(attendance);
-                yield Promise.all([attendance.save(), event.save()]);
-                res.send({ message: "attendance marked successfully" });
+                const attendance = new Attendance_1.default(Object.assign(Object.assign({}, req.body), { event_id: req.event._id, created_at: new Date(), updated_at: new Date() }));
+                yield attendance.save();
+                // event.attendances.push(attendance)
+                // await Promise.all([attendance.save(), event.save()]);
+                res.send({ message: "Participant Added successfully" });
             }
             catch (e) {
                 next(e);
