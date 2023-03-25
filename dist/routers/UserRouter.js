@@ -13,7 +13,7 @@ class UserRouter {
         this.deleteRoutes();
     }
     getRoutes() {
-        this.router.get('/', GlobalMiddleWare_1.GlobalMiddleWare.authenticate, UserController_1.UserController.getAllUser);
+        this.router.get('/', (0, GlobalMiddleWare_1.authorizeRoles)(["ADMIN", "USER"]), UserController_1.UserController.getAllUser);
     }
     postRoutes() {
         this.router.post('/signup', GlobalMiddleWare_1.GlobalMiddleWare.authenticate, UserController_1.UserController.signUp);

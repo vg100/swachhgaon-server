@@ -13,7 +13,6 @@ class AttendanceRouter {
         this.deleteRoutes();
     }
     getRoutes() {
-        // this.router.get('/',GlobalMiddleWare.authenticate,AttendanceController.getAllUser);
     }
     postRoutes() {
         this.router.post('/add/:id', GlobalMiddleWare_1.GlobalMiddleWare.authenticate, AttendanceValidator_1.AttendanceValidators.addAttendance(), GlobalMiddleWare_1.GlobalMiddleWare.checkError, AttendanceController_1.AttendanceController.add);

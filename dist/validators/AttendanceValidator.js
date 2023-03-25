@@ -18,7 +18,7 @@ class AttendanceValidators {
                 });
             }),
             (0, express_validator_1.body)('name', 'Name is Required').isString(),
-            (0, express_validator_1.body)('age', 'Age is Required').isNumeric(),
+            (0, express_validator_1.body)('village', 'Village is Required').isString(),
             (0, express_validator_1.body)('phone_no', 'Phone Number is Required').isNumeric(),
             (0, express_validator_1.body)('gender', 'Phone Number is Required').isString(),
         ];
