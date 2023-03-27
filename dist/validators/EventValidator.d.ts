@@ -3,4 +3,5 @@ export declare class EventValidators {
     static updateEvent(): import("express-validator").ValidationChain[];
     static finalsubmit(): import("express-validator").ValidationChain[];
     static deleteFile(): import("express-validator").ValidationChain[];
+    static removeEvent(): import("express-validator").ValidationChain[];
 }

@@ -35,10 +35,10 @@ class EventController {
             try {
                 var events;
                 if (req.user.role === "ADMIN") {
-                    events = yield Event_1.default.find({ user_id: req.query.userId }).populate('attendances');
+                    events = yield Event_1.default.find({ user_id: req.query.userId }).populate('participants');
                 }
                 if (req.user.role === "USER") {
-                    events = yield Event_1.default.find({ user_id: req.user.user_id }).populate('attendances');
+                    events = yield Event_1.default.find({ user_id: req.user.user_id }).populate('participants');
                 }
                 res.json(events);
             }
@@ -58,6 +58,18 @@ class EventController {
                 });
                 yield Event_1.default.findOneAndUpdate({ _id: event }, Object.assign(Object.assign({}, req.body), { type_of_training: req.body.training_type, no_of_participant: req.body.no_participant, no_of_males: req.body.male, no_of_females: req.body.female, files: [...req === null || req === void 0 ? void 0 : req.event.files, ...files] }), { new: true });
                 res.json({ message: 'updated successfully' });
+            }
+            catch (e) {
+                next(e);
+            }
+        });
+    }
+    static deleteEvent(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const event = req === null || req === void 0 ? void 0 : req.event;
+            try {
+                yield event.remove();
+                res.json({ message: 'removed successfully' });
             }
             catch (e) {
                 next(e);

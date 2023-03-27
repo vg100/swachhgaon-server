@@ -17,9 +17,8 @@ class AttendanceController {
             const event = req.event;
             try {
                 const attendance = new Attendance_1.default(Object.assign(Object.assign({}, req.body), { event_id: req.event._id, created_at: new Date(), updated_at: new Date() }));
-                yield attendance.save();
-                // event.attendances.push(attendance)
-                // await Promise.all([attendance.save(), event.save()]);
+                event.participants.push(attendance);
+                yield Promise.all([attendance.save(), event.save()]);
                 res.send({ message: "Participant Added successfully" });
             }
             catch (e) {

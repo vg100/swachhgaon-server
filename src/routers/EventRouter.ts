@@ -30,6 +30,7 @@ class EventRouter {
         this.router.patch('/finalsubmit/:id',GlobalMiddleWare.authenticate,EventValidators.finalsubmit(),new Utils().multer.array('file'),GlobalMiddleWare.checkError,EventController.finalSubmit);
     }
     deleteRoutes() {
+        this.router.delete('/remove/:id',GlobalMiddleWare.authenticate,EventValidators.removeEvent(),GlobalMiddleWare.checkError,EventController.deleteEvent)
         this.router.delete('/deletefile/:id/:index',GlobalMiddleWare.authenticate,EventValidators.deleteFile(),GlobalMiddleWare.checkError,EventController.deleteFile)
     }
 }

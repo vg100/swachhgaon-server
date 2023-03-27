@@ -27,6 +27,7 @@ class EventRouter {
         this.router.patch('/finalsubmit/:id', GlobalMiddleWare_1.GlobalMiddleWare.authenticate, EventValidator_1.EventValidators.finalsubmit(), new Utils_1.Utils().multer.array('file'), GlobalMiddleWare_1.GlobalMiddleWare.checkError, EventController_1.EventController.finalSubmit);
     }
     deleteRoutes() {
+        this.router.delete('/remove/:id', GlobalMiddleWare_1.GlobalMiddleWare.authenticate, EventValidator_1.EventValidators.removeEvent(), GlobalMiddleWare_1.GlobalMiddleWare.checkError, EventController_1.EventController.deleteEvent);
         this.router.delete('/deletefile/:id/:index', GlobalMiddleWare_1.GlobalMiddleWare.authenticate, EventValidator_1.EventValidators.deleteFile(), GlobalMiddleWare_1.GlobalMiddleWare.checkError, EventController_1.EventController.deleteFile);
     }
 }

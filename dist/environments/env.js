@@ -4,7 +4,7 @@ exports.getEnvironmentVariables = void 0;
 const prod_env_1 = require("./prod.env");
 const dev_env_1 = require("./dev.env");
 function getEnvironmentVariables() {
-    const isProduction = true;
+    const isProduction = false;
     if (isProduction) {
         console.log("prod env..");
         return prod_env_1.ProdEnvironment;

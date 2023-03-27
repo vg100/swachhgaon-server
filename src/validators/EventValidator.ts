@@ -54,6 +54,19 @@ export class EventValidators {
         })]
     }
 
+    static removeEvent() {
+        return [param('id').custom((id, {req}) => {
+            return Event.findOne({_id: id}).then((event) => {
+                if (event) {
+                    req.event = event
+                    return true;
+                } else {
+                    throw new Error('Event Does Not Exist');
+                }
+            })
+        })]
+    }
+
    
 }
 

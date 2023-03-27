@@ -12,4 +12,4 @@ const attendanceSchema = new mongoose.Schema({
     phone_no: { type: Number, required: true },
     gender: { type: String, required: true },
 });
-exports.default = (0, mongoose_1.model)('attendances', attendanceSchema);
+exports.default = (0, mongoose_1.model)('participants', attendanceSchema);

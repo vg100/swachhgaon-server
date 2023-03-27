@@ -1,16 +1,17 @@
 import {body, param} from 'express-validator';
 import Event from '../models/Event';
-
-
-
 export class AttendanceValidators {
     static addAttendance() {
         return [
             param('id').custom((id, {req}) => {
                 return Event.findOne({_id: id}).then((event) => {
                     if (event) {
-                        req.event = event;
-                        return true;
+                        if( event.no_of_participant !== event.participants.length){
+                            req.event = event;
+                            return true;
+                        }else{
+                            throw  new Error('Participant are full now');
+                        }
                     } else {
                         throw  new Error('Event Does Not Exist');
                     }

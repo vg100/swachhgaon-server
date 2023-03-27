@@ -8,17 +8,16 @@ export class AttendanceController {
     static async add(req, res, next) {
         const event = req.event
         try {
-            const attendance = new Attendance({
-                ...req.body,
-                event_id:req.event._id,
-                created_at: new Date(),
-                updated_at: new Date()
-            });
+    const attendance = new Attendance({
+        ...req.body,
+        event_id:req.event._id,
+        created_at: new Date(),
+        updated_at: new Date()
+    });
 
-            await attendance.save()
-            // event.attendances.push(attendance)
-            // await Promise.all([attendance.save(), event.save()]);
-            res.send({ message: "Participant Added successfully" })
+    event.participants.push(attendance)
+    await Promise.all([attendance.save(), event.save()]);
+    res.send({ message: "Participant Added successfully" })    
         } catch (e) {
             next(e);
         }

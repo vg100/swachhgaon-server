@@ -30,12 +30,12 @@ if(role==='USER'){
 
     try {
 
- var   events
+ var  events
 if(req.user.role==="ADMIN"){
-  events = await Event.find({user_id:req.query.userId}).populate('attendances')
+  events = await Event.find({user_id:req.query.userId}).populate('participants')
 }
 if(req.user.role==="USER"){
-  events = await Event.find({user_id:req.user.user_id}).populate('attendances')
+  events = await Event.find({user_id:req.user.user_id}).populate('participants')
 }     
 
         res.json(events);
@@ -61,6 +61,16 @@ if(req.user.role==="USER"){
     },
         {new: true});
         res.json({ message: 'updated successfully' });
+    } catch (e) {
+        next(e);
+    }
+  }
+
+  static async deleteEvent(req, res, next) {
+    const event=req?.event
+    try {
+        await event.remove();
+        res.json({ message: 'removed successfully' });
     } catch (e) {
         next(e);
     }
