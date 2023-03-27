@@ -15,6 +15,7 @@ const Multer = require("multer");
 const env_1 = require("../environments/env");
 const storageOptions = Multer.diskStorage({
     destination: function (req, file, cb) {
+        console.log("Util", (0, env_1.getEnvironmentVariables)().uploadPath);
         cb(null, (0, env_1.getEnvironmentVariables)().uploadPath);
     },
     filename: function (req, file, cb) {

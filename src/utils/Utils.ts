@@ -5,6 +5,7 @@ import { getEnvironmentVariables } from '../environments/env';
 const storageOptions =
     Multer.diskStorage({
         destination: function (req, file, cb) {
+            console.log("Util",getEnvironmentVariables().uploadPath)
             cb(null, getEnvironmentVariables().uploadPath)
         },
         filename: function (req, file, cb) {

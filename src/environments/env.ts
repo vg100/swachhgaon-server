@@ -9,8 +9,10 @@ export interface Environment {
 
 export function getEnvironmentVariables() {
     if (process.env.NODE_ENV === 'production') {
+        console.log("Producttion env..");
         return ProdEnvironment;
     } else {
+        console.log("Dev env..");
         return DevEnvironment;
     }
 }
