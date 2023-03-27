@@ -13,6 +13,7 @@ export function getEnvironmentVariables() {
     if (isProduction) {
         return ProdEnvironment;
     } else {
+        console.log("Dev env..");
         return DevEnvironment;
     }
 }
