@@ -63,7 +63,7 @@ class Server {
     //     }));
     // }
     setRoutes() {
-        this.app.use(`/api/${(0, env_1.getEnvironmentVariables)().path}/uploads`, express.static(`${(0, env_1.getEnvironmentVariables)().path}/uploads`));
+        this.app.use(`/api/dist/uploads`, express.static(`dist/uploads`));
         this.app.use('/api/user', UserRouter_1.default);
         this.app.use('/api/attendance', AttendanceRouter_1.default);
         this.app.use('/api/event', EventRouter_1.default);

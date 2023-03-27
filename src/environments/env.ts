@@ -9,8 +9,9 @@ export interface Environment {
 
 export function getEnvironmentVariables() {
 
-    const isProduction=true;
+    const isProduction=false;
     if (isProduction) {
+        console.log("prod env..");
         return ProdEnvironment;
     } else {
         console.log("Dev env..");

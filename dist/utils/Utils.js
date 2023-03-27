@@ -14,7 +14,7 @@ const Bcrypt = require("bcrypt");
 const Multer = require("multer");
 const storageOptions = Multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, `./uploads`);
+        cb(null, './dist/uploads');
     },
     filename: function (req, file, cb) {
         cb(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
