@@ -12,10 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Utils = void 0;
 const Bcrypt = require("bcrypt");
 const Multer = require("multer");
-const env_1 = require("../environments/env");
 const storageOptions = Multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, (0, env_1.getEnvironmentVariables)().uploadPath);
+        cb(null, `./uploads`);
     },
     filename: function (req, file, cb) {
         cb(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);

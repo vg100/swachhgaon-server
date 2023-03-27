@@ -4,11 +4,13 @@ import {DevEnvironment} from './dev.env';
 export interface Environment {
     db_url: string,
     jwt_secret: string,
-    uploadPath: string
+    path: string
 }
 
 export function getEnvironmentVariables() {
-    if (process.env.NODE_ENV === 'production') {
+
+    const isProduction=true;
+    if (isProduction) {
         return ProdEnvironment;
     } else {
         return DevEnvironment;

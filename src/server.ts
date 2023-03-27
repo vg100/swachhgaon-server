@@ -73,7 +73,7 @@ export class Server {
     // }
 
     setRoutes() {
-        this.app.use('/api/src/uploads', express.static('src/uploads'));
+        this.app.use(`/api/${getEnvironmentVariables().path}/uploads`, express.static(`${getEnvironmentVariables().path}/uploads`));
         this.app.use('/api/user', UserRouter);
         this.app.use('/api/attendance', AttendanceRouter);
         this.app.use('/api/event',EventRouter)
