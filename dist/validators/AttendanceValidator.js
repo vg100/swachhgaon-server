@@ -14,7 +14,7 @@ class AttendanceValidators {
                             return true;
                         }
                         else {
-                            throw new Error('Participant are full now');
+                            throw new Error('Participants exceed the limit');
                         }
                     }
                     else {

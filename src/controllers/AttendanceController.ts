@@ -17,7 +17,7 @@ export class AttendanceController {
 
     event.participants.push(attendance)
     await Promise.all([attendance.save(), event.save()]);
-    res.send({ message: "Participant Added successfully" })    
+    res.send({ message: "Participant added successfully" })    
         } catch (e) {
             next(e);
         }

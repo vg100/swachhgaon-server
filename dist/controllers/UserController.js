@@ -102,7 +102,7 @@ class UserController {
             try {
                 const hash = yield Utils_1.Utils.encryptPassword((_a = req === null || req === void 0 ? void 0 : req.body) === null || _a === void 0 ? void 0 : _a.password);
                 const newUser = yield User_1.default.findOneAndUpdate({ _id: req.userId._id }, Object.assign(Object.assign({}, req.body), { password: hash, passwordView: (_b = req === null || req === void 0 ? void 0 : req.body) === null || _b === void 0 ? void 0 : _b.password }), { new: true });
-                res.send({ message: 'updated successfully' });
+                res.send({ message: 'Updated successfully' });
             }
             catch (error) {
                 next(error);

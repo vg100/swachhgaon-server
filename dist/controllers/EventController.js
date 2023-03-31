@@ -57,7 +57,7 @@ class EventController {
                     files.push(file.path);
                 });
                 yield Event_1.default.findOneAndUpdate({ _id: event }, Object.assign(Object.assign({}, req.body), { type_of_training: req.body.training_type, no_of_participant: req.body.no_participant, no_of_males: req.body.male, no_of_females: req.body.female, files: [...req === null || req === void 0 ? void 0 : req.event.files, ...files] }), { new: true });
-                res.json({ message: 'updated successfully' });
+                res.json({ message: 'Updated successfully' });
             }
             catch (e) {
                 next(e);
@@ -69,7 +69,7 @@ class EventController {
             const event = req === null || req === void 0 ? void 0 : req.event;
             try {
                 yield event.remove();
-                res.json({ message: 'removed successfully' });
+                res.json({ message: 'Removed successfully' });
             }
             catch (e) {
                 next(e);
@@ -83,7 +83,7 @@ class EventController {
             try {
                 event.files.splice(index, 1);
                 event.save();
-                res.json({ message: 'removed successfully' });
+                res.json({ message: 'Removed successfully' });
             }
             catch (e) {
                 next(e);
@@ -158,7 +158,7 @@ class EventController {
                     isDone: req.body.isDone,
                     files: [...req === null || req === void 0 ? void 0 : req.event.files, ...files]
                 }, { new: true });
-                res.json({ message: 'submit successfully' });
+                res.json({ message: 'Submit successfully' });
             }
             catch (e) {
                 next(e);

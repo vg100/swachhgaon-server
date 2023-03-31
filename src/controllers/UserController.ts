@@ -86,7 +86,7 @@ static async updateUser(req,res,next){
             passwordView:req?.body?.password,
         },
             {new: true});
-            res.send({ message: 'updated successfully' });
+            res.send({ message: 'Updated successfully' });
     } catch (error) {
         next(error)
     }

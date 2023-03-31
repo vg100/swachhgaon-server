@@ -60,7 +60,7 @@ if(req.user.role==="USER"){
         files:[...req?.event.files,...files]
     },
         {new: true});
-        res.json({ message: 'updated successfully' });
+        res.json({ message: 'Updated successfully' });
     } catch (e) {
         next(e);
     }
@@ -70,7 +70,7 @@ if(req.user.role==="USER"){
     const event=req?.event
     try {
         await event.remove();
-        res.json({ message: 'removed successfully' });
+        res.json({ message: 'Removed successfully' });
     } catch (e) {
         next(e);
     }
@@ -82,7 +82,7 @@ if(req.user.role==="USER"){
     try {
         event.files.splice(index, 1)
         event.save()
-        res.json({ message: 'removed successfully' });
+        res.json({ message: 'Removed successfully' });
     } catch (e) {
         next(e);
     }
@@ -156,7 +156,7 @@ if(req.user.role==="USER"){
         files:[...req?.event.files,...files]
     },
         {new: true});
-        res.json({ message: 'submit successfully' });
+        res.json({ message: 'Submit successfully' });
     } catch (e) {
         next(e);
     }

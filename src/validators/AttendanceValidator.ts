@@ -10,7 +10,7 @@ export class AttendanceValidators {
                             req.event = event;
                             return true;
                         }else{
-                            throw  new Error('Participant are full now');
+                            throw  new Error('Participants exceed the limit');
                         }
                     } else {
                         throw  new Error('Event Does Not Exist');
