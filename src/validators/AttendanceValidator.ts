@@ -17,10 +17,10 @@ export class AttendanceValidators {
                     }
                 })
             }),
-            body('name', 'Name is Required').isString(),
-            body('village', 'Village is Required').isString(),
-            body('phone_no', 'Phone Number is Required').isNumeric(),
-            body('gender', 'Phone Number is Required').isString(),
+            body('name', 'Name is Required').notEmpty().withMessage("Name is Required"),
+            body('village', 'Village is Required').notEmpty().withMessage("Village is Required"),
+            body('phone_no', 'Phone Number is Required').notEmpty().withMessage("Phone Number is Required"),
+            body('gender', 'Gender is Required').notEmpty().withMessage("Gender is Required"),
         ]
     }
 

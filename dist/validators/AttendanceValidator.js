@@ -22,10 +22,10 @@ class AttendanceValidators {
                     }
                 });
             }),
-            (0, express_validator_1.body)('name', 'Name is Required').isString(),
-            (0, express_validator_1.body)('village', 'Village is Required').isString(),
-            (0, express_validator_1.body)('phone_no', 'Phone Number is Required').isNumeric(),
-            (0, express_validator_1.body)('gender', 'Phone Number is Required').isString(),
+            (0, express_validator_1.body)('name', 'Name is Required').notEmpty().withMessage("Name is Required"),
+            (0, express_validator_1.body)('village', 'Village is Required').notEmpty().withMessage("Village is Required"),
+            (0, express_validator_1.body)('phone_no', 'Phone Number is Required').notEmpty().withMessage("Phone Number is Required"),
+            (0, express_validator_1.body)('gender', 'Gender is Required').notEmpty().withMessage("Gender is Required"),
         ];
     }
 }

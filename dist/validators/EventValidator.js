@@ -32,13 +32,14 @@ class EventValidators {
     static finalsubmit() {
         return [(0, express_validator_1.param)('id').custom((id, { req }) => {
                 return Event_1.default.findOne({ _id: id }).then((event) => {
-                    if (event) {
-                        req.event = event;
-                        return true;
-                    }
-                    else {
+                    if (!event)
                         throw new Error('Event Does Not Exist');
-                    }
+                    if (event.no_of_participant !== event.participants.length)
+                        throw new Error('Please add more participant before final submit');
+                    if (req.files.length < 1)
+                        throw new Error('Add atleast one image');
+                    req.event = event;
+                    return true;
                 });
             })];
     }
@@ -70,3 +71,4 @@ class EventValidators {
     }
 }
 exports.EventValidators = EventValidators;
+//https://www.youtube.com/watch?v=dNlUDb77Bfc

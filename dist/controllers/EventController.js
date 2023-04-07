@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.EventController = void 0;
 const Event_1 = require("../models/Event");
 const Attendance_1 = require("../models/Attendance");
+const fs = require('fs');
 const XLSX = require('xlsx');
 class EventController {
     static addNewEvents(req, res, next) {
@@ -65,9 +66,13 @@ class EventController {
         });
     }
     static deleteEvent(req, res, next) {
+        var _a;
         return __awaiter(this, void 0, void 0, function* () {
             const event = req === null || req === void 0 ? void 0 : req.event;
             try {
+                (_a = event === null || event === void 0 ? void 0 : event.files) === null || _a === void 0 ? void 0 : _a.forEach((path) => {
+                    fs.unlinkSync(path);
+                });
                 yield event.remove();
                 res.json({ message: 'Removed successfully' });
             }
@@ -81,6 +86,15 @@ class EventController {
             const event = req === null || req === void 0 ? void 0 : req.event;
             const index = req === null || req === void 0 ? void 0 : req.params.index;
             try {
+                const pathname = event.files[req === null || req === void 0 ? void 0 : req.params.index];
+                fs.access(pathname, error => {
+                    if (!error) {
+                        fs.unlinkSync(pathname);
+                    }
+                    else {
+                        console.error('Error occured:', error);
+                    }
+                });
                 event.files.splice(index, 1);
                 event.save();
                 res.json({ message: 'Removed successfully' });
@@ -123,7 +137,16 @@ class EventController {
     static exportEvent(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const events = yield Event_1.default.find();
+                var events;
+                if (req.user.role === "ADMIN") {
+                    console.log('admin');
+                    events = yield Event_1.default.find({ user_id: req.query.userId });
+                }
+                if (req.user.role === "USER") {
+                    console.log('user');
+                    events = yield Event_1.default.find({ user_id: req.user.user_id });
+                }
+                // const events: any = await Event.find()
                 const data = events.map(event => {
                     return [event.eventname, event.district, event.block, event.gp, event.venue, event.no_of_participant
                     ];
@@ -146,9 +169,10 @@ class EventController {
         });
     }
     static finalSubmit(req, res, next) {
-        var _a;
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function* () {
-            const event = (_a = req === null || req === void 0 ? void 0 : req.event) === null || _a === void 0 ? void 0 : _a._id;
+            console.log((_a = req === null || req === void 0 ? void 0 : req.event) === null || _a === void 0 ? void 0 : _a._id);
+            const event = (_b = req === null || req === void 0 ? void 0 : req.event) === null || _b === void 0 ? void 0 : _b._id;
             try {
                 const files = [];
                 req.files.forEach((file) => {

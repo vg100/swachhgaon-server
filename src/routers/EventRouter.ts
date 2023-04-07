@@ -18,7 +18,7 @@ class EventRouter {
     }
     getRoutes() {
        this.router.get('/',GlobalMiddleWare.authenticate, EventController.getAllEvents);
-       this.router.get('/export-event',EventController.exportEvent)
+       this.router.get('/export-event',GlobalMiddleWare.authenticate,EventController.exportEvent)
        this.router.get('/export-participant',EventController.exportParticipantList)
     }
     postRoutes() {
@@ -26,8 +26,8 @@ class EventRouter {
         this.router.post('/add/:userId?',GlobalMiddleWare.authenticate,EventValidators.ceateEvent(),GlobalMiddleWare.checkError,EventController.addNewEvents);
     }
     patchRoutes() {
-        this.router.patch('/update/:id',GlobalMiddleWare.authenticate,EventValidators.updateEvent(),new Utils().multer.array('file'),GlobalMiddleWare.checkError,EventController.updateEvent);
-        this.router.patch('/finalsubmit/:id',GlobalMiddleWare.authenticate,EventValidators.finalsubmit(),new Utils().multer.array('file'),GlobalMiddleWare.checkError,EventController.finalSubmit);
+        this.router.patch('/update/:id',GlobalMiddleWare.authenticate,new Utils().multer.array('file'),EventValidators.updateEvent(),GlobalMiddleWare.checkError,EventController.updateEvent);
+        this.router.patch('/finalsubmit/:id',GlobalMiddleWare.authenticate,new Utils().multer.array('file'),EventValidators.finalsubmit(),GlobalMiddleWare.checkError,EventController.finalSubmit);
     }
     deleteRoutes() {
         this.router.delete('/remove/:id',GlobalMiddleWare.authenticate,EventValidators.removeEvent(),GlobalMiddleWare.checkError,EventController.deleteEvent)
